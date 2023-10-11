@@ -1,0 +1,89 @@
+.helo-section{
+    background-image: url("/images/Ueabc.jpg");
+    max-height: 70vh;
+}
+a {
+    text-decoration: none; /* Remove underlines */
+    color: inherit; /* Inherit text color from parent (usually black) */
+}
+.welcoming{
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.welcoming h1{
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: white;
+}
+.welcoming p{
+    font-size: 1.3rem;
+    color: white;
+}
+
+/* Style the explanation section */
+.explanation {
+    background-color: #f8f8f8; /* Choose a background color */
+    padding: 30px; /* Add some padding for spacing */
+}
+
+/* Style the main title */
+.explanation h1:first-child {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px; 
+}
+
+/* Style the subheadings (e.g., "How it Works") */
+.explanation h1 {
+    font-size: 1.5rem; 
+    color: #666;
+    margin-top: 30px; 
+}
+
+/* Style the paragraphs */
+.explanation p {
+    font-size: 1.1rem; 
+    color: #444;
+    margin-bottom: 15px; 
+}
+
+/* Style the ordered list */
+.explanation ol {
+    list-style-type: decimal; /* Use numbers as list markers */
+    margin-left: 30px; /* Add an indent for the list */
+    font-size: 1.1rem; /* Adjust the font size */
+    color: #444; /* Choose a text color */
+    margin-bottom: 15px; /* Add spacing below the list */
+}
+
+/* Style list items */
+.explanation li {
+    margin-bottom: 10px; /* Add spacing between list items */
+}
+
+/* Style the emphasis (e.g., "Apply today") */
+.explanation strong {
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Choose a text color */
+}
+footer{
+    display: flex;
+    justify-content: space-between;
+    background: #004282;
+}
+footer div{
+    margin: 30px;
+}
+footer a{
+    color: white;
+    font-size: 1rem;
+}
+.quick-links h2{
+ color: #dbd4d4;
+}
+footer h3{
+ color: beige;
+}

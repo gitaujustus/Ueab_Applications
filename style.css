@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+}
+nav{
+    background: #0078D4;
+    height: 70px;
+}
+.helo-section{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    background-color: #395471;
+}
+.form-head{
+    background: #3A5CAC;
+    padding-top: 20px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    height: 130px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+}
+#menus{
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    margin-right: 10px;
+    align-items: center;
+}
+#menus li{
+    cursor: pointer;
+    margin-left: 20px ;
+    font-size: 1.2rem;
+}
+#menus li:hover{
+    color: #ffffff;
+}
+
+.profile {
+    margin-top: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+}
+
+.profile .image img {
+    border-radius: 50%; /* Make the image round */
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    object-fit: cover; /* Preserve aspect ratio and cover the circle */
+}
+
+.profile p {
+    margin-top: -7px; /* Add space between image and welcome text */
+    font-size: 1.2rem; /* Adjust the font size as needed */
+}
