@@ -26,9 +26,12 @@ nav{
 .navbar{
     display: flex;
     justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 #menus{
     display: flex;
+    color: #ffffff;
     list-style: none;
     justify-content: space-between;
     margin-right: 10px;
@@ -40,7 +43,7 @@ nav{
     font-size: 1.2rem;
 }
 #menus li:hover{
-    color: #ffffff;
+    color: rgb(255, 182, 87);
 }
 
 .profile {
@@ -52,12 +55,65 @@ nav{
 
 .profile .image img {
     border-radius: 50%; /* Make the image round */
-    width: 50px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
+    width: 30px; /* Adjust the size as needed */
+    height: 30px; /* Adjust the size as needed */
     object-fit: cover; /* Preserve aspect ratio and cover the circle */
 }
 
 .profile p {
-    margin-top: -7px; /* Add space between image and welcome text */
-    font-size: 1.2rem; /* Adjust the font size as needed */
+    margin-top: 2px; /* Add space between image and welcome text */
+    font-size: 1.0rem; /* Adjust the font size as needed */
+}
+
+.menu-icon {
+    display: none; /* Initially hidden for larger screens */
+    cursor: pointer;
+    padding: 10px;
+}
+#menu-toggle {
+    display: none; /* Initially hide the icon */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    background: #0078D4;
+    border: 1px solid #0078D4;
+    border-radius: 5px;
+  }
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+}
+
+/* Your existing CSS */
+
+
+@media screen and (max-width: 860px) {
+    .navbar {
+        z-index: 1;
+        /* flex-direction: column; */
+    }
+
+    #menus {
+        display: none;
+        z-index: 1;
+        position: absolute;
+        top: 55px;
+        left: 0;
+        height: 50vh;
+        justify-content: flex-start;
+        width: 50vw;
+        background: #0078D4;
+        flex-direction: column;
+        align-items: start; 
+    }
+
+    #menus li {
+        margin: 10px 0;
+        font-size: 1.2rem;
+    }
+    #menu-toggle {
+        display: flex; /* Show the icon on small screens */
+      }
 }

@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>Graduation Application</title>
-        <meta http-equiv="refresh" content="5">
+        <!-- <meta http-equiv="refresh" content="5"> -->
         <link rel="stylesheet" href="style.css">
         <style>
                 form{
@@ -43,13 +43,49 @@
                 </div>
                 <label for="">Use your student ID as the username</label>
                 <br>
-                <input type="text">
+                <input type="text" id="username">
                 <br>
                 <label for="password">Password</label>
                 <br>
-                <input type="password" name="password" id="">
-                <input style="background-color: yellow; cursor: pointer;" type="button" value="Submit">
+                <input type="password" name="password" id="password">
+                <input style="background-color: yellow; cursor: pointer;" type="button" id="submit-button" value="Submit">
+                <div id="error-message" style="color: red;"></div>
             </form>
         </section>
+        <script>
+            document.getElementById('submit-button').addEventListener("click",()=>{
+                const username=document.getElementById('username').value
+                const password=document.getElementById('password').value
+                const credentials={
+                    username: username,
+                    password: password
+                }
+                fetch("http://localhost:8000/login",{
+                    method: 'POST',
+                    headers: {
+                        'Content-type' : 'application/json'
+                    },
+                    body:JSON.stringify(credentials)
+                })
+                .then((response)=>{
+                    if (!response.ok) {
+                        throw new Error("Invalid login credentials");
+                    }
+                    return response.json()
+                })
+                .then((data)=>{
+                    console.log("login successful");
+                    console.log(data);
+                    // Save user data to sessionStorage
+                sessionStorage.setItem('user', JSON.stringify(data));
+
+                // Redirect to the homepage (home.html)
+                window.location.href = 'home.html';
+                }).catch(error=>{
+                    console.log(error);
+                    document.getElementById('error-message').textContent = error.message;
+                })
+            })
+        </script>
     </body>
 </html>

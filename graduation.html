@@ -6,6 +6,7 @@
     <title>Graduation Application</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="home.css">
+    <script src="index.js"></script>
     <style>
         
         .graduation{
@@ -58,13 +59,25 @@
             padding: 8px;
             border-radius: 5px;
         }
+        @media screen and (max-width: 720px) {
+            form{
+                width: 80%;
+            }
+        }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <img src="./images/LOGO-BARA-copy-1-7.png" alt="" width="100px" srcset="">
+        <div style="display: flex;">
+            <div id="menu-toggle" class="menu-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <img src="./images/LOGO-BARA-copy-1-7.png" alt="" width="100px" srcset="">
+        </div>
         <ul id="menus">
-            <li><a href="/">Home</a></li>
+            <li><a href="/home.html">Home</a></li>
             <li><a href="/supp.html">Supplementary Exams</a></li>
             <li><a href="/graduation.html">Graduation</a></li>
             <li><a href="">Contact Us</a></li>
@@ -72,9 +85,9 @@
         </ul>
         <div class="profile">
             <div class="image">
-                <img src="/images/myP.png" alt="">
+                <img src="/images/user.jpeg" alt="">
             </div>
-            <p>welcome Justus</p>
+            <p id="welcoming-guest">welcome Guest</p>
         </div>
     </nav>
     <section class="graduation">
@@ -227,7 +240,7 @@
                 </div>
                 <div class="form-group">
                     <label for="courseId">Email</label>
-                    <input type="text" id="courseId">
+                    <input type="text" value="" id="your-email">
                 </div>
             </div>
             <hr>
@@ -236,7 +249,7 @@
                 <div class="form-group">
                     <label for="course">Home Address</label>
                      <br>
-                    <input type="text" id="course">
+                    <input type="text" value="" id="course">
                 </div>
                 <div class="form-group">
                     <label for="course">Phone</label>
@@ -247,8 +260,36 @@
                     <input type="text" id="courseId">
                 </div>
             </div>
-            <input type="submit" value="Submit">
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
         </form>
     </section>
+    <script>
+        const userData=sessionStorage.getItem('user')
+        if (userData) {
+            const user=JSON.parse(userData)
+            const welcomeMessage=document.getElementById("welcoming-guest");
+            welcomeMessage.textContent=`Welcome ${user[0].FirstName}.`
+            const emailInput = document.getElementById('your-email');
+            emailInput.value = user[0].Email;
+        }
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+    const menus = document.getElementById('menus');
+    menus.style.display = menus.style.display === 'block' ? 'none' : 'block';
+  });
+  
+    // Listen for window resize events
+    window.addEventListener("resize", () => {
+              // Check if the screen is larger than 760px
+              if (window.innerWidth > 860) {
+                  menus.style.display = 'flex';
+              }
+              else {
+               menus.style.display = 'none';
+               }
+            
+          });
+    </script>
 </body>
 </html>

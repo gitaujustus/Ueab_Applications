@@ -37,12 +37,13 @@
             margin-left: 10px;
         }
 
-        .form-group input {
+        .form-group input,select {
             width: 90%;
             margin: 10px;
             padding: 10px;
             border-radius: 5px;
         }
+
         .form-group-b input {
             width: 90%;
             margin: 10px;
@@ -54,14 +55,26 @@
             color: #ffffff;
             background: #4235d2;
         }
+        @media screen and (max-width: 720px) {
+            form{
+                width: 80%;
+            }
+        }
 
     </style>
 </head>
 <body>
-     <nav class="navbar">
-        <img src="./images/LOGO-BARA-copy-1-7.png" alt="" width="100px" srcset="">
+    <nav class="navbar">
+        <div style="display: flex;">
+            <div id="menu-toggle" class="menu-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <img src="./images/LOGO-BARA-copy-1-7.png" alt="" width="100px" srcset="">
+        </div>
         <ul id="menus">
-            <li><a href="/">Home</a></li>
+            <li><a href="/home.html">Home</a></li>
             <li><a href="/supp.html">Supplementary Exams</a></li>
             <li><a href="/graduation.html">Graduation</a></li>
             <li><a href="">Contact Us</a></li>
@@ -69,9 +82,9 @@
         </ul>
         <div class="profile">
             <div class="image">
-                <img src="/images/myP.png" alt="">
+                <img src="/images/user.jpeg" alt="">
             </div>
-            <p>welcome Justus</p>
+            <p id="welcoming-guest">welcome Guest</p>
         </div>
     </nav>
     <section class="supp">
@@ -80,42 +93,125 @@
                 <div class="form-group">
                     <label for="course">Major</label>
                      <br>
-                    <input type="text" id="course">
+                    <input required type="text" id="major">
                 </div>
                 <div class="form-group">
                     <label for="course">Course Code</label>
-                    <input type="text" id="course">
+                    <input required type="text" id="courseCode">
                 </div>
                 <div class="form-group">
                     <label for="courseId">Course Title</label>
-                    <input type="text" id="courseId">
+                    <input required type="text" id="courseTitle">
                 </div>
                 <div class="form-group">
                     <label for="courseId">Credits</label>
-                    <input type="text" id="courseId">
+                    <input required type="text" id="credits">
                 </div>
                 <div class="form-group">
                     <label for="semester">Semester Taken</label>
-                    <input type="text" id="semester">
+                    <select required id="semesterTaken">
+                        <option value="First Semester">First Semester</option>
+                        <option value="Second Semester">Second Semester</option>
+                        <option value="Trimester">Trimester</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="semester">CAT Grade</label>
-                    <input type="text" id="semester">
+                    <input required type="text" id="CatGrade">
                 </div>
                 <div class="form-group">
                     <label for="reason">Final Exam Grade</label>
-                    <input type="text" id="reason">
+                    <input required type="text" id="FinalGrade">
                 </div>
                 <div class="form-group">
-                    <label style="margin: 20px;" for="certify">I CERTIFY THAT THE INFORMATION GIVEN ABOVE IS CORRECT  TO THE BEST OF MY KNOWLEDGE</label>
-                    <input type="checkbox" name="" id="certify">
+                    <label style="margin: 20px;" for="certify">I <span id="your-name"></span>, CERTIFY THAT THE INFORMATION GIVEN ABOVE IS CORRECT  TO THE BEST OF MY KNOWLEDGE</label>
+                    <input required type="checkbox" name="" id="certify">
                 </div>
                 <p style="font-size: 1.1rem;">I request to sit for a supplementary exam for the above course. i understand that i have to pay supplemetary Exam fee of 1/3 the cost per credit for each supplementary Exam i take before taking the exam. I also undersstand that if i pass the Supplementary Exam, my final garde for the class will be no higher than C+</p>
                 <div class="form-group-b">
-                    <input type="submit" value="Submit">
+                <input type="button" value="Submit" id="submit-form">
                 </div>
+                <div id="error-message" style="color: red;"></div>
+                <div id="success-message" style="color: green;"></div>
             </form>
 
     </section>
+    <script>
+        const userData=sessionStorage.getItem('user')
+        if (userData) {
+            const user=JSON.parse(userData)
+            const welcomeMessage=document.getElementById("welcoming-guest");
+            welcomeMessage.textContent=`Welcome ${user[0].FirstName}.`
+            const name=document.getElementById("your-name");
+            name.textContent=user[0].FirstName.toUpperCase()
+        
+        const studentId = user[0].StudentId;
+        document.getElementById('submit-form').addEventListener('click',()=>{
+            const Major=document.getElementById('major').value; 
+            const CourseCode=document.getElementById('courseCode').value; 
+            const courseTitle=document.getElementById('courseTitle').value; 
+            const Credit=document.getElementById('credits').value; 
+            const SemesterTaken=document.getElementById('semesterTaken').value; 
+            const CatGrade=document.getElementById('CatGrade').value; 
+            const FinalGrade=document.getElementById('FinalGrade').value; 
+
+            const requiredFields = [Major, CourseCode, courseTitle, Credit, SemesterTaken, CatGrade, FinalGrade];
+            if (requiredFields.some(field => field.trim() === '')) {
+                document.getElementById('error-message').textContent = "Please fill in all required fields.";
+            } else {
+            const suppData={
+                StudentId: studentId,
+                Major: Major,
+                CourseCode: CourseCode,
+                courseTitle: courseTitle,
+                Credit: Credit,
+                SemesterTaken: SemesterTaken,
+                CatGrade: CatGrade,
+                FinalGrade: FinalGrade,
+            }
+            fetch('http://localhost:8000/supp',{
+                method:'POST',
+                headers: {
+                    'Content-type':'application/json'
+                },
+                body:JSON.stringify(suppData)
+            }).then(res=>{
+                if (res.status === 200) {
+                    console.log("sucessss");
+                    return res.json(); // Only attempt to parse JSON if the response status is 200
+                } else {
+                    throw new Error('Error applying Sup: ' + res.statusText); // Extract error information from the response
+                }
+            }).then(data=>{
+                window.location.href = 'success.html';
+                document.getElementById('success-message').textContent = "Application Submitted successfully";
+
+            }).catch(error=>{
+                console.log(error);
+                    document.getElementById('error-message').textContent = error.message;
+            })
+        }
+
+        })
+    }
+
+    
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+  const menus = document.getElementById('menus');
+  menus.style.display = menus.style.display === 'block' ? 'none' : 'block';
+});
+
+  // Listen for window resize events
+  window.addEventListener("resize", () => {
+            // Check if the screen is larger than 760px
+            if (window.innerWidth > 860) {
+                menus.style.display = 'flex';
+            }
+            else {
+             menus.style.display = 'none';
+             }
+          
+        });
+    </script>
 </body>
 </html>
