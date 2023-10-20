@@ -2,8 +2,34 @@ CREATE TABLE Accounts  (
   StudentId VARCHAR (20) PRIMARY KEY,
   FirstName VARCHAR(20) NOT NULL,
   LastName VARCHAR(20) NOT NULL,
-  Email VARCHAR(30) NOT NULL
+  Email VARCHAR(30) NOT NULL,
+  HomeAddress VARCHAR(20),
+  Phone VARCHAR(20),
+  ParentsHomeAddress VARCHAR(20),
+  ParentsEmail VARCHAR(20),
 );
+ 
+CREATE TABLE Semester1(
+  CourseCode VARCHAR(20) NOT NULL,
+  CourseTitle VARCHAR(50) NOT NULL,
+  Credits INT NOT NULL,
+  StudentId VARCHAR(20) NOT NULL,
+  FOREIGN KEY (StudentId) REFERENCES Accounts(StudentId)
+)
+CREATE TABLE Semester2(
+  CourseCode VARCHAR(20) NOT NULL,
+  CourseTitle VARCHAR(50) NOT NULL,
+  Credits INT NOT NULL,
+  StudentId VARCHAR(20) NOT NULL,
+  FOREIGN KEY (StudentId) REFERENCES Accounts(StudentId)
+)
+CREATE TABLE Intersem(
+  CourseCode VARCHAR(20) NOT NULL,
+  CourseTitle VARCHAR(50) NOT NULL,
+  Credits INT NOT NULL,
+  StudentId VARCHAR(20) NOT NULL,
+  FOREIGN KEY (StudentId) REFERENCES Accounts(StudentId)
+)
 CREATE TABLE Supp (
   SuppId INT AUTO_INCREMENT PRIMARY KEY,
   StudentId VARCHAR(20) NOT NULL,
@@ -31,3 +57,4 @@ VALUES
   ("SPQRS1234", "David", "Jones", "spqrs1234@gmail.com"),
   ("SUXYZ5678", "Ella", "Taylor", "suxyz5678@gmail.com"),
   ("SWXYZ9012", "Sarah", "Lee", "swxyz9012@gmail.com");
+

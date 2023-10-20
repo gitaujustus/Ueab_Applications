@@ -84,6 +84,84 @@ app.get('/',(req,res)=>{
 })
 
 
+app.post('/graduation', (req, res) => {
+    const Courses = req.body.courses;
+    const HomeAddress = req.body.HomeAddress;
+    const StudentId = req.body.StudentId;
+    const Phone = req.body.Phone;
+    const HomeAddressParent = req.body.HomeAddressParent;
+    const ParentsPhone = req.body.ParentsPhone;
+    const ParentsEmail = req.body.ParentsEmail;
+
+    // Update personal details in the ACCOUNTS table
+    const updateQuery = 'UPDATE ACCOUNTS SET HomeAddress=?, Phone=?, ParentsHomeAddress=?, ParentsEmail=? WHERE StudentId=?';
+    db.query(updateQuery, [HomeAddress, Phone, HomeAddressParent, ParentsEmail, StudentId], (error, response) => {
+        if (error) {
+            console.log("Error updating Personal Details in the Db", error);
+            return res.status(500).send("Error occurred while updating Personal Details");
+        }
+    });
+
+    // Define an array of table names for the semesters
+    const semesterTables = ['semester1', 'semester2', 'intersem'];
+
+    // Insert course data into the corresponding semester tables
+    Courses.forEach((semesterCourses, index) => {
+        const semesterTable = semesterTables[index];
+
+        semesterCourses.forEach((course) => {
+            const insertQuery = 'INSERT INTO ?? (courseCode, courseTitle, Credits, StudentId) VALUES (?, ?, ?, ?)';
+            const values = [semesterTable, course.courseCode, course.courseTitle, course.creditHours, StudentId];
+
+            db.query(insertQuery, values, (error, response) => {
+                if (error) {
+                    console.log(`Error inserting data into ${semesterTable}`, error);
+                }
+            });
+        });
+    });
+
+    console.log("Details Updated Successfully");
+    res.status(200).send(StudentId);
+});
+
+
+// app.post('/graduation', (req, res) => {
+//     const Courses = req.body.courses;
+//     const HomeAddress = req.body.HomeAddress;
+//     const StudentId = req.body.StudentId;
+//     const Phone = req.body.Phone;
+//     const HomeAddressParent = req.body.HomeAddressParent;
+//     const ParentsPhone = req.body.ParentsPhone;
+//     const ParentsEmail = req.body.ParentsEmail;
+ 
+//     const updateQuery = 'UPDATE ACCOUNTS SET HomeAddress=?, Phone=?, ParentsHomeAddress=?, ParentsEmail=? WHERE StudentId=?';
+//     db.query(updateQuery, [HomeAddress, Phone, HomeAddressParent, ParentsEmail, StudentId], (error, response) => {
+//        if (error) {
+//           console.log("Error inserting Personal Details in the Db", error);
+//           return res.status(500).send("Error occurred while updating Personal Details");
+//        } else {
+//           console.log("Details Updated Successfully", response);
+//           res.status(200).send(response);
+//        }
+//     });
+
+//     //Insert into Semester 1
+
+//     //Insert into Semester 2
+
+//     //Insert into Semester 3
+
+
+    
+//  });
+
+ 
+
+
+
+
+
 
 
 app.listen(8000,()=>{
