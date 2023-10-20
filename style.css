@@ -96,7 +96,9 @@ footer{
     display: flex;
     justify-content: space-between;
     background: #004282;
+    
 }
+
 footer div{
     margin: 30px;
 }
@@ -148,11 +150,17 @@ footer p{
 @media screen and (max-width: 560px) {
     footer{
         display: block;
+        margin-bottom: -30px;
     }
     footer p{
         margin-top: 10%;
         margin-left: 20px;
         margin-bottom: 10%;
     }
+    .logout{
+        margin-top: -19px; 
+      
+    }
+    
    
 }
