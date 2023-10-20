@@ -20,7 +20,7 @@ header h1 {
 }
 
 main {
-    height: 62vh;
+    min-height: 42vh;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -34,7 +34,7 @@ main p {
 }
 
 footer {
-    background-color: #0078D4;
+    background-color: #004282;
     color: #fff;
     text-align: center;
     padding: 10px;

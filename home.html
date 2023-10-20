@@ -6,6 +6,7 @@
     <title>home</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="home.css">
+    <script src="index.js"></script>
 
 </head>
 <body>
@@ -22,14 +23,15 @@
             <li><a href="/home.html">Home</a></li>
             <li><a href="/supp.html">Supplementary Exams</a></li>
             <li><a href="/graduation.html">Graduation</a></li>
-            <li><a href="">Contact Us</a></li>
-            <li><a href="">About Us</a></li>
+            <!-- <li><a href="">Contact Us</a></li>
+            <li><a href="">About Us</a></li> -->
         </ul>
         <div class="profile">
             <div class="image">
                 <img src="/images/user.jpeg" alt="">
             </div>
             <p id="welcoming-guest">welcome Guest</p>
+            <button class="logout" id="logout">Logout</button>
         </div>
     </nav>
 <section class="helo-section">
@@ -58,10 +60,12 @@
 <footer>
     <div class="quick-links">
         <h2>Quick Links</h>
-        <h6><a href="#">Home</a></h6>
-        <h6><a href="#">Graduation</a></h6>
-        <h6><a href="#">Supplementary</a></h6>
+        <h6><a href="home.html">Home</a></h6>
+        <h6><a href="/graduation.html">Graduation</a></h6>
+        <h6><a href="/supp.html">Supplementary</a></h6>
     </div>
+   
+    <p >&copy; 2023 University of Eastern Africa, Baraton</p>
     <div>
         <h3> © 2023 UEAB</h3>
         <h3>All rights reserved.</h3>
@@ -75,24 +79,10 @@
         const welcomeMessage=document.getElementById("welcoming-guest");
         welcomeMessage.textContent=`Welcome ${user[0].FirstName}.`
     }
-
-    document.getElementById('menu-toggle').addEventListener('click', function () {
-  const menus = document.getElementById('menus');
-  menus.style.display = menus.style.display === 'block' ? 'none' : 'block';
-});
-
-  // Listen for window resize events
-  window.addEventListener("resize", () => {
-            // Check if the screen is larger than 760px
-            if (window.innerWidth > 860) {
-                menus.style.display = 'flex';
-            }
-            else {
-             menus.style.display = 'none';
-             }
-          
-        });
-
+    document.getElementById('logout').addEventListener('click',()=>{
+        sessionStorage.removeItem('user')
+        window.location.href=('/')
+    })
 </script>
 </body>
 </html>

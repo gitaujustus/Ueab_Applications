@@ -13,7 +13,7 @@
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                     width: fit-content;
                     background: #ffffff;
-                    width: 30%;
+                    width: 35%;
                 }
                 form h1{
                     font-size: x-large;
@@ -28,6 +28,26 @@
                 form label{
                     font-size: large;
                     font-weight: bold;
+                }
+                @media screen and (max-width: 1020px) {
+                    form{
+                        width: 50%;
+                    }
+                }
+                @media screen and (max-width: 860px) {
+                    form{
+                        width: 70%;
+                    }
+                }
+                @media screen and (max-width: 560px) {
+                    form{
+                        width: 80%;
+                    }
+                }
+                @media screen and (max-width: 320px) {
+                    form{
+                        width: 90%;
+                    }
                 }
         </style>
     </head>
@@ -53,6 +73,7 @@
             </form>
         </section>
         <script>
+            
             document.getElementById('submit-button').addEventListener("click",()=>{
                 const username=document.getElementById('username').value
                 const password=document.getElementById('password').value

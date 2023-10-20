@@ -3,13 +3,13 @@ body{
 }
 nav{
     background: #0078D4;
-    height: 70px;
+    height: 78px;
 }
 .helo-section{
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Full viewport height */
+    justify-content: center; 
+    align-items: center;
+    height: 100vh;
     background-color: #395471;
 }
 .form-head{
@@ -50,19 +50,25 @@ nav{
     margin-top: 2px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center align items horizontally */
+    align-items: center;
 }
 
 .profile .image img {
-    border-radius: 50%; /* Make the image round */
-    width: 30px; /* Adjust the size as needed */
-    height: 30px; /* Adjust the size as needed */
-    object-fit: cover; /* Preserve aspect ratio and cover the circle */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    object-fit: cover; 
 }
 
 .profile p {
-    margin-top: 2px; /* Add space between image and welcome text */
-    font-size: 1.0rem; /* Adjust the font size as needed */
+    margin-top: 2px;
+    font-size: 1.0rem;
+}
+.logout{
+    margin-top: -17px; 
+    padding: 2px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .menu-icon {
@@ -86,20 +92,41 @@ nav{
     margin: 4px 0;
 }
 
-/* Your existing CSS */
+footer{
+    display: flex;
+    justify-content: space-between;
+    background: #004282;
+}
+footer div{
+    margin: 30px;
+}
+footer a{
+    color: white;
+    font-size: 1rem;
+}
+.quick-links h2{
+ color: #dbd4d4;
+}
+footer h3{
+ color: beige;
+}
+footer p{
+    margin-top: 10%;
+    color: white;
+}
+
 
 
 @media screen and (max-width: 860px) {
     .navbar {
         z-index: 1;
-        /* flex-direction: column; */
     }
 
     #menus {
         display: none;
         z-index: 1;
         position: absolute;
-        top: 55px;
+        top: 63px;
         left: 0;
         height: 50vh;
         justify-content: flex-start;
@@ -116,4 +143,16 @@ nav{
     #menu-toggle {
         display: flex; /* Show the icon on small screens */
       }
+}
+
+@media screen and (max-width: 560px) {
+    footer{
+        display: block;
+    }
+    footer p{
+        margin-top: 10%;
+        margin-left: 20px;
+        margin-bottom: 10%;
+    }
+   
 }
