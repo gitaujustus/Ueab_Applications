@@ -32,12 +32,14 @@ app.get('/data',(req,res)=>{
         res.send(data)
     })
 })
+
+
 app.post('/login',(req,res)=>{
     const username=req.body.username;
     const password=req.body.password;
     console.log(username);
 
-    Selectquery=`Select StudentId, FirstName, LastName, Email From Accounts WHERE StudentId = ? AND PASSWORD= ?`
+    Selectquery=`Select StudentId, FirstName, LastName, Email, CreditsHoursDone, TotalCreditHours, Phone From Accounts WHERE StudentId = ? AND PASSWORD= ?`
 
     db.query(Selectquery,[username, password],(err,data)=>{
         if (err) {
