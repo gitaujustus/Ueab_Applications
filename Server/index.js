@@ -56,6 +56,26 @@ app.post('/login',(req,res)=>{
     })
 })
 
+app.post('/userDetails', (req, res) => {
+    const StudentId=req.body.StudentId
+    console.log("The useerrr");
+    Selectquery=`Select StudentId, FirstName, LastName, Email, CreditsHoursDone, TotalCreditHours, Phone From Accounts WHERE StudentId = ?`
+
+    db.query(Selectquery,[StudentId],(err,data)=>{
+        if (err) {
+            console.log("Err occured trying to fetch the data", err);
+            return res.status(500).send("Error occurred while trying to fetch the data");
+        }
+        // Check if data is empty (no match found)
+        if (data.length === 0) {
+            console.log("No User");
+            return res.status(401).send("No User");
+        }
+        console.log(data);
+        res.send(data)
+    })
+  });
+
 app.post('/supp', (req, res) => {
     const StudentId = req.body.StudentId; // You need to get the StudentId from the user's session or request
     const Major = req.body.Major;
