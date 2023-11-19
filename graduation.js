@@ -3,23 +3,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const userData = sessionStorage.getItem('user');
     var StudentId=''
     if (userData) {
-        const user = JSON.parse(userData);
+        const user = JSON.parse(userData);        
+
         const CreditHoursDone=user[0].CreditsHoursDone
         const TotalCreditHours=user[0].TotalCreditHours
         const PhoneNumber=user[0].Phone
         const remainingcredits= TotalCreditHours-CreditHoursDone
-        console.log("PhoneNumber= "+PhoneNumber);
-        console.log("PhoneNumber = " + PhoneNumber);
+       
         if (PhoneNumber === null) {
-            console.log("PhoneNumber is null");
+            // console.log("PhoneNumber is null");
             document.getElementById('graduation-form').style.display = 'block';
             document.getElementById('applicationDone').style.display = 'none';
         } else {
             document.getElementById('graduation-form').style.display = 'none';
             document.getElementById('applicationDone').style.display = 'block';
-            console.log("PhoneNumber is not null");
         }
-        
 
         //if the user is not qualified
         if (remainingcredits < 40) {
@@ -39,6 +37,37 @@ document.addEventListener('DOMContentLoaded', function () {
         const emailInput = document.getElementById('your-email');
         emailInput.value = user[0].Email;
         StudentId = user[0].StudentId;
+
+        
+        fetch("http://localhost:8000/userDetails",{
+                    method: 'POST',
+                    headers:{
+                        'content-type':'application/json'
+                    },
+                    body:JSON.stringify({StudentId: StudentId })
+                }).then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw Error("Failed to fetch user details");
+                    }
+                    })
+                    .then((userData) => {
+                    if (userData[0].Phone === null) {
+                        // console.log("PhoneNumber is null");
+                        document.getElementById('graduation-form').style.display = 'block';
+                        document.getElementById('applicationDone').style.display = 'none';
+                    } else {
+                        document.getElementById('graduation-form').style.display = 'none';
+                        document.getElementById('applicationDone').style.display = 'block';
+                    }
+
+
+                }).catch(error =>{
+                    console.log(error);
+                    document.getElementById('error-message').textContent = "An error occured trying to apply for graduation";
+                })
+            
     }
 
     const menuToggle = document.getElementById('menu-toggle');

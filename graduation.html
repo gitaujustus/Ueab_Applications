@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="home.css">
     <script src="graduation.js"></script>
+    <!-- <script>
+        const userData = sessionStorage.getItem('user');
+        console.log(userData);
+        if (!userData) {
+            const ID=user[0].StudentId
+            console.log("ID");
+        fetch("http://localhost:8000/userDetails",{
+                    method: 'POST',
+                    headers:{
+                        'content-type':'application/json'
+                    },
+                    body:JSON.stringify(ID)
+                }).then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw Error("Failed to fetch user details");
+                    }
+                    })
+                    .then((userData) => {
+                    console.log(userData);
+
+                }).catch(error =>{
+                    console.log(error);
+                    document.getElementById('error-message').textContent = "An error occured trying to apply for graduation";
+                })
+            }
+    </script> -->
     <style>
         
         .graduation{
